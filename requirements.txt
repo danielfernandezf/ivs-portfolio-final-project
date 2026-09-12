@@ -1,55 +1,55 @@
 # ============================================================================
-#  Institutional Valuation System — dependencias Python
-#  Instalación:  pip install -r requirements.txt
+#  Institutional Valuation System — Python dependencies
+#  Install:  pip install -r requirements.txt
 # ============================================================================
 #
-#  AVISO CRÍTICO SOBRE YFINANCE
-#  ----------------------------
-#  yfinance < 1.0 rompe TODAS las descargas de precios EN SILENCIO: no lanza
-#  excepción, simplemente devuelve vacío. El efecto en la aplicación es que los
-#  precios se congelan al coste de compra y la cartera aparenta un +6 % falso.
-#  Este fichero fijaba antes `yfinance==0.2.40`, que es exactamente la versión
-#  afectada. NO bajar de la 1.0.
+#  CRITICAL NOTICE ABOUT YFINANCE
+#  -------------------------------
+#  yfinance < 1.0 breaks ALL price downloads SILENTLY: it doesn't raise an
+#  exception, it just returns empty. The effect on the application is that
+#  prices freeze at the purchase cost and the portfolio shows a false +6%.
+#  This file used to pin `yfinance==0.2.40`, which is exactly the affected
+#  version. Do NOT go below 1.0.
 #
-#  Diagnóstico en segundos:  GET /api/health  devuelve la ruta del intérprete
-#  y la versión de yfinance que está usando el backend realmente.
+#  Diagnose in seconds:  GET /api/health  returns the interpreter path and
+#  the yfinance version the backend is actually using.
 # ============================================================================
 
-# ── API y servidor ──────────────────────────────────────────────────────────
+# ── API and server ──────────────────────────────────────────────────────────
 fastapi>=0.111
 uvicorn[standard]>=0.29
 pydantic>=2.7
 python-multipart>=0.0.9
 
-# ── Datos de mercado ────────────────────────────────────────────────────────
-yfinance>=1.2,<2.0        # ver aviso de cabecera: NUNCA < 1.0
+# ── Market data ──────────────────────────────────────────────────────────────
+yfinance>=1.2,<2.0        # see header notice: NEVER < 1.0
 requests>=2.32
-curl_cffi>=0.7            # sesión HTTP que usa yfinance internamente
+curl_cffi>=0.7            # HTTP session used internally by yfinance
 
-# ── Cálculo numérico ────────────────────────────────────────────────────────
+# ── Numerical computation ───────────────────────────────────────────────────
 pandas>=2.2
 numpy>=1.26
-scipy>=1.11               # Monte Carlo: test de Kolmogorov-Smirnov
+scipy>=1.11               # Monte Carlo: Kolmogorov-Smirnov test
 
-# ── Informes ────────────────────────────────────────────────────────────────
-reportlab>=4.2            # generación de PDF de tesis de inversión
+# ── Reports ──────────────────────────────────────────────────────────────────
+reportlab>=4.2            # PDF generation for investment theses
 
-# ── Ciencia de datos: notebooks 01–04 ───────────────────────────────────────
-scikit-learn>=1.4         # modelos, métricas, validación
+# ── Data science: notebooks 01–04 ───────────────────────────────────────────
+scikit-learn>=1.4         # models, metrics, validation
 matplotlib>=3.8
 seaborn>=0.13
 jupyter>=1.0
 nbformat>=5.10
 
-# ── Gen AI: notebook 05 ─────────────────────────────────────────────────────
-# La recuperación (troceado + TF-IDF + coseno) funciona sólo con scikit-learn,
-# ya listado arriba: el notebook se ejecuta entero SIN clave de API.
-# `anthropic` sólo hace falta para la última celda, la llamada real al LLM,
-# que además necesita la variable de entorno ANTHROPIC_API_KEY.
-anthropic>=0.40             # opcional — la celda está protegida con try/ImportError
+# ── Gen AI: notebook 05 ──────────────────────────────────────────────────────
+# Retrieval (chunking + TF-IDF + cosine) works with scikit-learn alone,
+# already listed above: the notebook runs end-to-end WITHOUT an API key.
+# `anthropic` is only needed for the last cell, the actual LLM call,
+# which also requires the ANTHROPIC_API_KEY environment variable.
+anthropic>=0.40             # optional — the cell is guarded with try/ImportError
 
-# ── Generación de la presentación: presentacion/build_deck.py ───────────────
-# Sólo se necesita si hay que regenerar IVS_Presentacion_TFM.pptx.
-python-pptx>=1.0            # opcional
-Pygments>=2.17              # opcional — capturas de código con resaltado
-Pillow>=10.0                # opcional — rasterizado de esas capturas
+# ── Presentation generation: presentacion/build_deck.py ─────────────────────
+# Only needed if IVS_Presentacion_TFM.pptx has to be regenerated.
+python-pptx>=1.0            # optional
+Pygments>=2.17              # optional — syntax-highlighted code screenshots
+Pillow>=10.0                # optional — rasterizing those screenshots
