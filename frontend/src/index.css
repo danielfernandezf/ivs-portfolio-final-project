@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-bloomberg-bg text-bloomberg-text-primary font-mono;
+    font-size: 13px;
+  }
+
+  * {
+    @apply border-bloomberg-border;
+  }
+}
+
+@layer components {
+  .bb-panel {
+    @apply bg-bloomberg-panel border border-bloomberg-border;
+  }
+
+  .bb-label {
+    @apply text-bloomberg-text-secondary text-2xs uppercase tracking-widest;
+  }
+
+  .bb-value {
+    @apply text-bloomberg-text-primary font-mono font-semibold;
+  }
+
+  .bb-amber {
+    @apply text-bloomberg-amber;
+  }
+
+  .bb-electric {
+    @apply text-bloomberg-electric;
+  }
+
+  .bb-green {
+    @apply text-bloomberg-green;
+  }
+
+  .bb-red {
+    @apply text-bloomberg-red;
+  }
+
+  .bb-slider {
+    @apply w-full h-1 appearance-none bg-bloomberg-border rounded cursor-pointer;
+    accent-color: #f5a623;
+  }
+
+  .ticker-glow {
+    text-shadow: 0 0 20px rgba(245, 166, 35, 0.6);
+  }
+
+  .glow-green {
+    box-shadow: 0 0 8px rgba(0, 204, 68, 0.4), inset 0 0 2px rgba(0, 204, 68, 0.1);
+  }
+
+  .glow-red {
+    box-shadow: 0 0 8px rgba(255, 51, 51, 0.4), inset 0 0 2px rgba(255, 51, 51, 0.1);
+  }
+
+  .glow-electric {
+    box-shadow: 0 0 8px rgba(0, 170, 255, 0.3), inset 0 0 2px rgba(0, 170, 255, 0.1);
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(12px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes scanline {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100vh); }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s ease-out both;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.35s ease-out both;
+}
+
+.animate-scaleIn {
+  animation: scaleIn 0.25s ease-out both;
+}
+
+/* Staggered children animation */
+.stagger-children > * {
+  animation: fadeIn 0.3s ease-out both;
+}
+.stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+.stagger-children > *:nth-child(2) { animation-delay: 60ms; }
+.stagger-children > *:nth-child(3) { animation-delay: 120ms; }
+.stagger-children > *:nth-child(4) { animation-delay: 180ms; }
+.stagger-children > *:nth-child(5) { animation-delay: 240ms; }
+.stagger-children > *:nth-child(6) { animation-delay: 300ms; }
+
+/* Scrollbar styling — Bloomberg dark */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0a;
+}
+::-webkit-scrollbar-thumb {
+  background: #1e1e1e;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #333;
+}
